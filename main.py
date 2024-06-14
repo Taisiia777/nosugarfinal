@@ -1,4 +1,4 @@
-import аsyncio
+import asyncio
 
 import nest_asyncio
 import logging
@@ -6,12 +6,12 @@ import ssl
 import os
 import sys
 
-from аiohttp.web_app import Application
+from aiohttp.web_app import Application
 from aiohttp.web_runner import AppRunner, TCPSite
 
 from handlers import my_router
 from routes import open_main_handler, get_dots_handler, get_menu_handler, \
-    pay_success, create_order_handler, check_is_auth_handler, get_points_handler, update_or_create_dots
+    pay_success, create_order_handler, check_is_auth_handler, get_points_handler, update_or_create_dots, get_user_phone_number, get_user_phone_info_handler, get_orders_by_user_handler
 
 from aiogram import Bot, Dispatcher
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
@@ -38,7 +38,6 @@ async def main():
 
     app = Application()
     app["bot"] = bot
-
     app.router.add_get("", open_main_handler)
     app.router.add_get("/", open_main_handler)
     app.router.add_post("/checkIsAuth", check_is_auth_handler)
@@ -47,6 +46,11 @@ async def main():
     app.router.add_post("/getDots", get_dots_handler)
     app.router.add_post("/getPoints", get_points_handler)
     app.router.add_post("/paySuccess", pay_success)
+    app.router.add_post("/getPhone", get_user_phone_number)
+    app.router.add_post("/getUserBonus", get_user_phone_info_handler)
+    app.router.add_post("/get_orders_by_user", get_orders_by_user_handler)
+
+
 
     local_dir = os.path.join(os.path.dirname(__file__), "static")
     app.router.add_static('/static', local_dir)
@@ -63,7 +67,7 @@ async def main():
     else:
         ssl_context = None
     runner = AppRunner(app)
-    await runner.sеtup()
+    await runner.setup()
 
     if PORT == 443:
         site = TCPSite(runner, "0.0.0.0", PORT, ssl_context=ssl_context)
