@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="MobileOptimized" content="176"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="robots" content="noindex,nofollow"/>
+    <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
+    <script>
+        function setThemeClass() {
+            document.documentElement.className = Telegram.WebApp.colorScheme;
+        }
+
+        Telegram.WebApp.onEvent('themeChanged', setThemeClass);
+        setThemeClass();
+    </script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=142d4f4e-9279-46dc-a0f2-68b48ca473eb&lang=ru_RU" type="text/javascript"></script>
+    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="bg-orange" style="visibility: hidden; background-color: #fff;">
+    <div id="preloader">
+        <span class="loader"></span>
+    </div>
+<i id="back-button" class="" style="display: flex; align-items: center; justify-content: center; margin-top: 50px; width: 20px; height: 20px; background: none; z-index: 1000;" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L21 21" stroke="black" stroke-width="2"/>
+        <path d="M21 1L1 21" stroke="black" stroke-width="2"/>
+        </svg>
+</i>
+<i id="back-button-address" style="display: flex; align-items: center; justify-content: center; margin-top: 50px; width: 20px; height: 20px; background: none; z-index: 1000;" class="" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L21 21" stroke="black" stroke-width="2"/>
+        <path d="M21 1L1 21" stroke="black" stroke-width="2"/>
+        </svg>
+</i>
+<div class="back-orange"></div>
+<div class="logo black" id="main-logo" style="font-size: 60px; padding-left: 10px; padding-top: 5px;">Безумно. <span id="under-logo" style="padding-left: 15px;">Крутая шаурма.</span></div>
+<div class="logo black" id="main-logo1" style="display: none; flex-direction: column;" >Безумно. <span style="font-weight: 400;" id="under-logo1" >Крутая шаурма.</span></div>
+<select style="display: none; color: #000; position: absolute; top: 85px; left: 20px; border-radius: 50px; height: 38px; padding-left: 20px; background: transparent; appearance: none; -webkit-appearance: none; -moz-appearance: none;" id="address-list-header" class="">
+</select>
+<div class="header__referal" style="display: none; position: absolute; top: 10px; right: 80px; max-width: 100px;">
+    <p style="
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 11.94px;
+    text-align: left;
+    color: #000;
+    ">
+        Бонусные баллы
+    </p>
+    <div style="
+    margin-top: 7px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 17.91px;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    min-width: 45px;
+    width: 46px;
+    min-height: 30px;
+    height: 31px;
+    border-radius: 50px;
+    " class="header__referal-points" id="popup-ref-header">
+        
+    </div>
+</div>
+<button class="hamburger-menu" style="display: none;" onclick="openMenu()">☰</button>
+    <div class="side-panel" id="sidePanel">
+        <div style="display: flex; position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: #F16522; ">
+            <div style="font-size: 34px; padding-left: 15px; padding-top: 10px; font-weight: 700; color: #000; max-width: 140px;">Безумно. <span style="display: flex; position: absolute; top:50px; left: 18px; font-size: 16px; font-weight: 400;">Крутая шаурма.</span></div>
+        </div>
+        <div class="popup__phone">
+            <svg style="margin-top: 23px; margin-left: 20px;margin-right: 20px" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 15H0C0 11.134 1.13401 8 8 8C14.866 8 16 11.134 16 15Z" fill="#F16522"/>
+                <path d="M13 6C13 8.20914 10.2091 10 8 10C5.79086 10 3 8.20914 3 6C3 3.79086 5.79086 2 8 2C10.2091 2 13 3.79086 13 6Z" fill="black"/>
+                <circle cx="8" cy="4" r="4" fill="#F16522"/>
+                </svg>
+            <p id="sidebar-phone">+7 909 542 77 99</p>
+        </div>
+        <div class="popup__adress">
+            <select style="display: flex; position: absolute; top: 150px; left: 15px; border-radius: 50px; height: 38px; padding-left: 20px; color: #000; border: none; background: transparent; appearance: none; -webkit-appearance: none; -moz-appearance: none;" id="address-list-menu" class="">
+            </select>
+            <div class="popup__adress-contacts">
+                <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.80101 9.71555L7.81569 10.7041C7.7046 10.7594 7.57517 10.7821 7.44744 10.7685C7.31971 10.7549 7.2008 10.7058 7.10913 10.6289C5.6034 9.33497 4.51593 7.73193 3.9521 5.97515C3.91967 5.86913 3.92921 5.75697 3.97924 5.65603C4.02928 5.55509 4.11702 5.47101 4.22888 5.41679L6.23231 4.43238C6.34237 4.37822 6.42872 4.29505 6.47831 4.19542C6.52789 4.0958 6.53802 3.98514 6.50715 3.88019L5.70538 1.20813C5.67906 1.12203 5.62646 1.04338 5.55291 0.980168C5.47936 0.91695 5.38748 0.87141 5.28658 0.848164L1.70969 0.0324622C1.14068 -0.100046 0.437369 0.164821 0.261338 0.98015C-0.418239 4.12746 0.237011 7.19325 2.11659 9.96475C3.99617 12.7363 6.189 14.8021 9.73108 15.8757C10.2235 16.0189 10.9789 16.0696 11.4448 15.8567C11.5862 15.7922 11.7104 15.7035 11.8096 15.5963C11.9089 15.489 11.9811 15.3655 12.0218 15.2335L12.9802 12.1893C13.007 12.1033 13.0066 12.0128 12.979 11.927C12.9515 11.8412 12.8978 11.7631 12.8233 11.7006L10.4955 9.8045C10.4066 9.72774 10.2909 9.67757 10.1657 9.66153C10.0404 9.6455 9.91249 9.66445 9.80101 9.71555Z" fill="#F16522"/>
+                    </svg>
+                <p class="popup__adress-phone"id="dashboard-phone">
+                    
+                    +7 901 611 53 17
+                </p>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="8" fill="#F16522"/>
+                    <path d="M8 3V9H12" stroke="white" stroke-width="2"/>
+                    </svg>
+                <p class="popup__adress-time" id="dashboard-time">
+                    
+                        Круглосуточно
+                </p>
+            </div>
+        </div>
+        <div class="popup__bonuses">
+            <h2>
+                Бонусная программа
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12.5" cy="12.5" r="12.5" fill="#FF7431"/>
+                    <path d="M11.328 18V15.968H13.392V18H11.328ZM11.504 14.848C11.504 14.1547 11.5733 13.5947 11.712 13.168C11.8613 12.7307 12.16 12.304 12.608 11.888C12.6507 11.8453 12.752 11.7547 12.912 11.616C13.0827 11.4667 13.1947 11.3653 13.248 11.312C13.3013 11.2587 13.392 11.168 13.52 11.04C13.648 10.9013 13.7333 10.7893 13.776 10.704C13.8293 10.6187 13.888 10.512 13.952 10.384C14.0267 10.2453 14.0747 10.112 14.096 9.984C14.128 9.84533 14.144 9.70133 14.144 9.552C14.144 9.08267 13.9893 8.69867 13.68 8.4C13.3707 8.10133 12.9707 7.952 12.48 7.952C11.232 7.952 10.5867 8.70933 10.544 10.224H8.704C8.75733 9.04 9.104 8.10667 9.744 7.424C10.384 6.73067 11.3067 6.384 12.512 6.384C13.5893 6.384 14.4533 6.67733 15.104 7.264C15.7653 7.84 16.096 8.60267 16.096 9.552C16.096 9.904 16.0587 10.2187 15.984 10.496C15.9093 10.7733 15.776 11.0347 15.584 11.28C15.392 11.5253 15.2213 11.7227 15.072 11.872C14.9227 12.0213 14.6827 12.2347 14.352 12.512C13.8187 12.9707 13.4987 13.3067 13.392 13.52C13.2853 13.7227 13.232 14.1653 13.232 14.848H11.504Z" fill="white"/>
+                    </svg>
+                    
+            </h2>
+            <div class="popup-ref-program">
+                <h2>Ваши баллы</h2>
+                <p>
+                    Вы получаете 3% от суммы каждого заказа
+                    <span>
+                        1 бонус = 1 рубль
+                    </span>
+                </p>
+                <div id="popup-ref">
+
+                </div>
+            </div>
+            <div class="popup-history" id="history-section-open"  onclick="openHistory()">
+                <h2 class="popup-history-title" >
+                    История заказов
+                </h2>
+                <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L9 9L1 17" stroke="#F16522" stroke-width="2"/>
+                    </svg>
+            </div>
+        </div>
+        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+        
+    </div>
+
+    <div class="side-panel"  style="z-index: 3;" id="sidePanel1">
+        <div style="display: flex; position: absolute; top: 15px; left: 0; width: 100%; height: 80px; background: #fff;">
+            <div style="font-size: 30px; padding-left: 15px; padding-top: 10px; font-weight: 700; color: #000; max-width: 100%;">История заказов</div>
+        </div>
+         <div id="history-section" style="padding-top: 20px;">
+            
+         </div>       
+        <a href="javascript:void(0)" class="close-btn" onclick="closeHistory()">&times;</a>
+    </div>
+
+<section id="step2-select-dot">
+    <div style="display: flex;height: 50px; width: 100%; background: #000; margin-top: -25px;">
+        <h1 class="" style="margin-top:15px; margin-left: 15px; color: #fff; font-size: 16; font-weight: 550; line-height: 15.76px; height: 50px;">Выберите адрес</h1>
+    </div>
+    <div class="select__where">
+        <div class="select__all active" id="all" onclick="closeMap()">Все</div>
+        <div class="select__all" id="near" onclick="openMap()">Рядом со мной</div>
+    </div>
+    <div class="select-wrapper">
+        <ul id="address-list" class="black">
+        </ul>
+        <div id="map" style="display: none;"></div>
+
+    </div>
+</section>
+
+<section id="step3-menu">
+    <div id="step3-menu-items">
+    </div>
+</section>
+<section id="step3-1-select-product">
+    <img class="product__image" src="/static/images/Rectangle 5 (1).png" id="step3-1-select-product-img" alt="">
+    <h2 class="product__title" id="step3-1-select-product-name"></h2>
+    <p class="product__descr" id="step3-1-select-product-descr">Цыпленок, ароматный лаваш, фирменный соус, сочный гранат, томаты, картофель фри, маринованные огурчики</p>
+    <div class="option" style="box-shadow: none;">
+        <b>Выберите размер</b>
+        <div class="options"  id="sizeOptions">
+        </div>
+    </div>
+    <div class="option">
+        <b class="active">Добавки</b>
+        <div class="options" id="additionalOptions">
+        </div>
+    </div>
+</section>
+
+<section id="step4-basket">
+    <h3>Корзина</h3>
+    <div id="basket">
+    </div>
+    <div class="sum">
+        <p class="sum__text">
+            Сумма заказа
+        </p>
+        <p class="sum__value">
+
+        </p>
+    </div>
+    <div class="pickup_time">
+        <h3 class="adress_deliv">
+            Откуда забирать
+            <p class="adress_deliv-point">
+
+            </p>
+        </h3>
+        <h3 style="margin-top: 0px;" class="time_pick">Когда будете забирать
+            <select style="border-radius: 15px;" id="pickup_time" required>
+            </select>
+        </h3>
+    </div>
+    <div style="margin-top: 50px;" class="pay_method">
+        <h3 >Способ оплаты:
+            <select id="payment_method" required>
+                <!-- <option value="online">Онлайн</option> -->
+                <option value="after">При получении</option>
+            </select>
+        </h3>
+    </div>
+    
+    <a id="payBtn" class="pk-pay-link" href="#" data-pk-sum="100"
+       data-pk-orderid="1" data-pk-clientid="2" data-pk-description="тестовое описание">тестовое описание</a>
+
+</section>
+
+<section id="step5-pay">
+
+</section>
+
+<section id="step6-confirm">
+    <h2>
+        Заказ оформлен
+    </h2>
+    <div>
+        <p>
+            № заказа
+        </p>
+        <span id="orderId">
+            
+        </span>
+    </div>
+</section>
+
+<script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://widgets.paykeeper.ru/paywidget/js/09611d8d1c52ffb6c59cdf8bcfa93772699e2eafa0e1cdf854da73ee39ae5b6e"></script>
+
+<script type="text/javascript" src="static/main.js"></script>
+
+</body>
+</html>
