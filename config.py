@@ -1,3 +1,3 @@
 BOT_TOKEN = '6813610143:AAHVWoX-lREAMPhDtGP2IfxJNFDIrkWvN1g'
 APP_BASE_URL = "https://chatbot-bezumno.ru"
-PORT = 443
+PORT = 8000
