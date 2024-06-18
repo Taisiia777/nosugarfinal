@@ -93,30 +93,27 @@ import nest_asyncio
 import logging
 import ssl
 import os
-import sys
 
+from aiohttp import web
 from aiohttp.web_app import Application
 from aiohttp.web_runner import AppRunner, TCPSite
-
-from handlers import my_router
-from routes import open_main_handler, get_dots_handler, get_menu_handler, \
-    pay_success, create_order_handler, check_is_auth_handler, get_points_handler, update_or_create_dots, get_user_phone_number, get_user_phone_info_handler, get_orders_by_user_handler
 
 from aiogram import Bot, Dispatcher
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from aiogram.enums import ParseMode
 from aiogram.client.bot import DefaultBotProperties
 
-from config import BOT_TOKEN, APP_BASE_URL, PORT
+from config import BOT_TOKEN, APP_BASE_URL
 
 TOKEN = BOT_TOKEN
+WEB_URL = "https://nosugar.shop"  # URL вашего React приложения
 
+async def open_main_handler(request):
+    return web.HTTPFound(location=WEB_URL)
 
 async def start_bot(bot, dispatcher):
     await bot.delete_webhook(drop_pending_updates=True)
-    await bot.set_webhook(f"{APP_BASE_URL}/webhook")
-    # await dispatcher.start_polling(bot) # Убедитесь, что это закомментировано, если вы используете вебхуки
-
+    await dispatcher.start_polling(bot)
 
 async def main():
     bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
@@ -151,11 +148,10 @@ async def main():
     runner = AppRunner(app)
     await runner.setup()
 
-    site = TCPSite(runner, "0.0.0.0", 8000)  # Изменено на порт 8000
+    site = TCPSite(runner, "0.0.0.0", 8000)
     await site.start()
 
     await start_bot(bot, dispatcher)
-
 
 if __name__ == "__main__":
     nest_asyncio.apply()
@@ -164,4 +160,3 @@ if __name__ == "__main__":
     update_or_create_dots()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
-
