@@ -153,7 +153,7 @@ async def main():
     runner = AppRunner(app)
     await runner.setup()
 
-    site = TCPSite(runner, "0.0.0.0", 8000)
+    site = TCPSite(runner, "0.0.0.0", 8080)
     await site.start()
 
     await start_bot(bot, dispatcher)
