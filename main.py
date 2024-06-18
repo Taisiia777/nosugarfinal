@@ -89,21 +89,26 @@
 #     loop.run_until_complete(main())
 
 import asyncio
+
 import nest_asyncio
 import logging
 import ssl
 import os
+import sys
 
-from aiohttp import web
 from aiohttp.web_app import Application
 from aiohttp.web_runner import AppRunner, TCPSite
+
+from handlers import my_router
+from routes import open_main_handler, get_dots_handler, get_menu_handler, \
+    pay_success, create_order_handler, check_is_auth_handler, get_points_handler, update_or_create_dots, get_user_phone_number, get_user_phone_info_handler, get_orders_by_user_handler
 
 from aiogram import Bot, Dispatcher
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from aiogram.enums import ParseMode
 from aiogram.client.bot import DefaultBotProperties
 
-from config import BOT_TOKEN, APP_BASE_URL
+from config import BOT_TOKEN, APP_BASE_URL, PORT
 
 TOKEN = BOT_TOKEN
 WEB_URL = "https://nosugar.shop"  # URL вашего React приложения
