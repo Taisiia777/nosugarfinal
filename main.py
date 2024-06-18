@@ -111,6 +111,8 @@ from aiogram.client.bot import DefaultBotProperties
 from config import BOT_TOKEN, APP_BASE_URL, PORT
 
 TOKEN = BOT_TOKEN
+
+TOKEN = BOT_TOKEN
 WEB_URL = "https://nosugar.shop"  # URL вашего React приложения
 
 async def open_main_handler(request):
@@ -141,7 +143,7 @@ async def main():
     app.router.add_post("/getUserBonus", get_user_phone_info_handler)
     app.router.add_post("/get_orders_by_user", get_orders_by_user_handler)
 
-    local_dir = os.path.join(os.path.dirname(__file__), "static")
+    local_dir = os.path.join(os.path.dirname(__file__), "static/nosugar/build")
     app.router.add_static('/static', local_dir)
 
     SimpleRequestHandler(
