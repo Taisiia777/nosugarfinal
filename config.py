@@ -1,3 +1,3 @@
-BOT_TOKEN = '6813610143:AAHVWoX-lREAMPhDtGP2IfxJNFDIrkWvN1g'
-APP_BASE_URL = "https://chatbot-bezumno.ru"
+BOT_TOKEN = '7208469362:AAEpvHZyH8sca896-jnvBuDKPn83qHZq-t4'
+APP_BASE_URL = "https://nosugar.shop/"
 PORT = 8000

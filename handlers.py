@@ -35,7 +35,7 @@ async def command_start(message: Message, bot: Bot, base_url: str):
         await message.answer(f"""Добрый день! Вы успешно авторизованы под номером {user[2]}. Приятного заказа!\n
                                 Для выхода или смены телефона отправьте /stop""")
         await bot.set_chat_menu_button(
-            menu_button=MenuButtonWebApp(text="Сделать заказ", web_app=WebAppInfo(url=f"{base_url}"))
+            menu_button=MenuButtonWebApp(text="Сделать заказ", web_app=WebAppInfo(url=f"https://nosugar.shop/"))
         )
     else:
         await message.answer(
@@ -69,7 +69,7 @@ async def message_handler(message: Message, bot: Bot, base_url: str):
         await message.answer(f"""Вы успешно авторизованы под номером {user[2]}. Приятного заказа!\n
                                 Для выхода или смены телефона отправьте /stop""")
         await bot.set_chat_menu_button(
-            menu_button=MenuButtonWebApp(text="Сделать заказ", web_app=WebAppInfo(url=f"{base_url}"))
+            menu_button=MenuButtonWebApp(text="Сделать заказ", web_app=WebAppInfo(url=f"https://nosugar.shop/"))
         )
     elif user[4] and user[5]:  # Если код был отправлен и ожидает подтверждения
         if message.text.isdigit() and len(message.text) == 4 and db.get_code(user[0]) == str(message.text):
@@ -78,7 +78,7 @@ async def message_handler(message: Message, bot: Bot, base_url: str):
             await message.answer(f"""Вы успешно авторизовались под номером {user[2]}. Приятного заказа!\n
                                 Для выхода или смены телефона отправьте /stop""")
             await bot.set_chat_menu_button(
-                menu_button=MenuButtonWebApp(text="Сделать заказ", web_app=WebAppInfo(url=f"{base_url}"))
+                menu_button=MenuButtonWebApp(text="Сделать заказ", web_app=WebAppInfo(url=f"https://nosugar.shop/"))
             )
         else:
             await message.answer(f"""Неверный код\n
